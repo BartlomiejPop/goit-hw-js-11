@@ -78,6 +78,7 @@ img {
 @media (max-width: 666px) {
   .info {
     width: 100px;
+    gap: 1px;
   }
 }
 
