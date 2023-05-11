@@ -2,7 +2,7 @@ import axios from 'axios';
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-// import throttle from 'lodash.throttle';
+import throttle from 'lodash.throttle';
 
 let pageCounter;
 
@@ -43,16 +43,16 @@ const renderGalleryItems = pictures => {
   </div>
   <div class="info">
     <p class="info-item">
-      <b>Likes: ${el.likes}</b>
+      <b>Likes:</b><span class="info-value"> ${el.likes}</span>
     </p>
     <p class="info-item">
-      <b>Views: ${el.views}</b>
+      <b>Views:</b><span class="info-value"> ${el.views}</span>
     </p>
     <p class="info-item">
-      <b>Comments: ${el.comments}</b>
+      <b>Comments:</b><span class="info-value"> ${el.comments}</span>
     </p>
     <p class="info-item">
-      <b>Downloads: ${el.downloads}</b>
+      <b>Downloads:</b><span class="info-value"> ${el.downloads}</span>
     </p>
   </div>
 </div>`)
@@ -71,7 +71,6 @@ const handleInfiniteScroll = () => {
         renderGalleryItems(res);
       })
       .catch(error => console.error(error));
-    
   }
 };
 
@@ -84,11 +83,10 @@ submitBtn.addEventListener('click', e => {
   });
 });
 
-window.addEventListener(
-  'scroll',
+window.addEventListener('scroll', () => {
   // throttle(() => {
-  handleInfiniteScroll
-  // }, 1000)
-);
+  handleInfiniteScroll();
+  // }, 1000);
+});
 
 var lightbox = new SimpleLightbox('.gallery a', { captionDelay: 500 });
